@@ -44,14 +44,14 @@ sensor_info["ip"] = ip
 sensor_info["mask"] = mask
 sensor_info["line"] = line
 sensor_info["id"] = sensor_id
-restclient.POST("http://{0}:{1}/sensors".format(monitor_ip, monitor_port), params=sensor_info, headers={'Content-Type': 'application/json'})
+restclient.POST("http://{0}:{1}/sensors".format(monitor_ip, monitor_port), params=sensor_info, headers={'Content-Type': 'application/json'}, async=False)
 print "register sensor {0}/{1} in monitor {2}:{3}".format(ip, mask, monitor_ip, monitor_port)
 
 #get external ip
-sensor_parent_ip = restclient.GET("http://{0}:{1}/sensors/{2}".format(monitor_ip, monitor_port, sensor_id))
+sensor_parent_ip = restclient.GET("http://{0}:{1}/sensors/{2}".format(monitor_ip, monitor_port, sensor_id), async=False)
 gateway_external = "external_root"
 if sensor_parent_ip != "":
-    gateway_external = restclient.GET(sensor_parent_ip)
+    gateway_external = restclient.GET(sensor_parent_ip, async=False)
 """
 #scan sensor network information
 getNetworkCMD = "ip addr"
@@ -111,5 +111,7 @@ for host_ip in scan_report.keys():
     host["services"] = services
     hosts.append(host)
 
-ret = restclient.POST("http://{0}:{1}/sensors/{2}/hosts".format(monitor_ip, monitor_port, sensor_id), params=hosts, headers={'Content-Type': 'application/json'})
+restclient.POST("http://{0}:{1}/sensors/{2}/hosts".format(monitor_ip, monitor_port, sensor_id), params=hosts, headers={'Content-Type': 'application/json'}, async=False)
 print "send post request {0}".format("http://{0}:{1}/sensors/{2}/hosts".format(monitor_ip, monitor_port, sensor_id))
+params_json = json.dumps(hosts)
+print "json is:\n {0}".format(params_json)
