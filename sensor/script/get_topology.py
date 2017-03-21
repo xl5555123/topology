@@ -111,5 +111,5 @@ for host_ip in scan_report.keys():
     host["services"] = services
     hosts.append(host)
 
-ret = restclient.POST("http://{0}:{1}/sensors/{1}/hosts".format(monitor_ip, monitor_port, sensor_id), params=hosts, headers={'Content-Type': 'application/json'})
-print ret
+ret = restclient.POST("http://{0}:{1}/sensors/{2}/hosts".format(monitor_ip, monitor_port, sensor_id), params=hosts, headers={'Content-Type': 'application/json'})
+print "send post request {0}".format("http://{0}:{1}/sensors/{2}/hosts".format(monitor_ip, monitor_port, sensor_id))
