@@ -4,6 +4,7 @@ import org.serc.topology.exception.UnregularIpException;
 import org.serc.topology.model.Ip;
 import org.serc.topology.model.Sensor;
 import org.serc.topology.model.transform.AddSensorDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -16,15 +17,27 @@ import java.util.logging.Logger;
 @org.springframework.stereotype.Service
 public class SensorService {
 
-    public final static Logger LOGGER = Logger.getLogger(this.getClass().toString());
+    public final static Logger LOGGER = Logger.getLogger(SensorService.class.toString());
 
     public final static String MONITER_GATEWAY = "192.168.200.2";
 
     private Map<String, Sensor> sensors = new ConcurrentHashMap<String, Sensor>();
 
+    @Autowired
+    private HostService hostService;
+
     public List<Sensor> getSensors() {
         calculateSensor();
         return new ArrayList<Sensor>(sensors.values());
+    }
+
+    public void removeSensor(String sensorId) {
+        hostService.removeHostsBySensorId(sensorId);
+        if (sensors.containsKey(sensorId)) {
+            Sensor sensor = sensors.get(sensorId);
+            LOGGER.info(String.format("remove sensor %s, ip is %s", sensor.getId(), sensor.getIp().toString()));
+            sensors.remove(sensorId);
+        }
     }
 
     public String addSensor(AddSensorDTO sensorDTO) throws UnregularIpException {
@@ -32,6 +45,7 @@ public class SensorService {
         sensor.setId(sensorDTO.getId());
         Ip ip = new Ip(sensorDTO.getIp());
         sensor.setIp(ip);
+        sensor.setUpdated(new Date());
         sensor.setMask(sensorDTO.getMask());
         List<Ip> line = new ArrayList<Ip>();
         for (String router : sensorDTO.getLine()) {

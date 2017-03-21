@@ -39,6 +39,11 @@ public class Controller {
         }
         return ret;
     }
+    @RequestMapping(value = "/sensors/{sensorId}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void removeSensor(@PathVariable String sensorId) {
+        sensorService.removeSensor(sensorId);
+    }
 
     @RequestMapping(value = "/sensors/{sensorId}", method = RequestMethod.GET)
     public String getSensorParentIpAndPort(@PathVariable String sensorId) {

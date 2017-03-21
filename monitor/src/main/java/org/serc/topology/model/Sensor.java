@@ -3,6 +3,7 @@ package org.serc.topology.model;
 import org.serc.topology.exception.UnregularIpException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class Sensor {
     private int mask;
     private List<Ip> line;
     private String parentId;
+    private Date updated;
 
     private Sensor parentSensor;
     private List<Sensor> childSensors;
@@ -89,5 +91,13 @@ public class Sensor {
 
     public void setChildSensors(List<Sensor> childSensors) {
         this.childSensors = childSensors;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

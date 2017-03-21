@@ -2,6 +2,7 @@ package org.serc.topology.model.transform;
 
 import org.serc.topology.model.Sensor;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,6 +15,15 @@ public class HostDTO {
     private List<ServiceDTO> services;
     private String mac;
     private String name;
+    private Date updated;
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
     public String getName(String sensorId) {
         return String.format("%s_%s_%s", sensorId, inner_interface, outer_interface).replace(".", "_").replace("-", "_");

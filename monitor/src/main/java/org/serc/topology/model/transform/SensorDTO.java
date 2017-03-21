@@ -4,6 +4,7 @@ import org.serc.topology.model.Ip;
 import org.serc.topology.model.Sensor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +17,15 @@ public class SensorDTO {
     private List<String> line;
     private String parentId;
     private String network;
+    private Date updated;
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
     public String getNetwork() {
         return network;
@@ -47,6 +57,7 @@ public class SensorDTO {
                 childSensors.add(new SensorDTO(childSensor));
             }
         }
+        this.updated = sensor.getUpdated();
 
     }
 
