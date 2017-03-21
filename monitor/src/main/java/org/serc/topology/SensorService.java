@@ -8,12 +8,15 @@ import org.springframework.stereotype.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 /**
  * Created by Xander on 2017/3/15.
  */
 @org.springframework.stereotype.Service
 public class SensorService {
+
+    public final static Logger LOGGER = Logger.getLogger(this.getClass().toString());
 
     public final static String MONITER_GATEWAY = "192.168.200.2";
 
@@ -36,6 +39,8 @@ public class SensorService {
         }
         sensor.setLine(line);
         sensors.put(sensor.getId(), sensor);
+        LOGGER.info(String.format("Register Sensor:{id:%s, ip:%s" +
+                "}", sensor.getId(), sensor.getIp()));
         return sensor.getId();
     }
 
