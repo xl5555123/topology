@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java:8
 VOLUME /tmp
 ADD topology-1.0-SNAPSHOT.jar app.jar
 RUN sh -c 'touch /app.jar'
