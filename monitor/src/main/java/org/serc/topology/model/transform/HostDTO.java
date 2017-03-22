@@ -15,7 +15,6 @@ public class HostDTO {
     private List<ServiceDTO> services;
     private String mac;
     private String name;
-    private Date updated;
 
     public Date getUpdated() {
         return updated;
@@ -25,8 +24,10 @@ public class HostDTO {
         this.updated = updated;
     }
 
+    private Date updated;
+
     public String getName(String sensorId) {
-        return String.format("%s_%s_%s", sensorId, inner_interface, outer_interface).replace(".", "_").replace("-", "_");
+        return String.format("%s_%s", sensorId, inner_interface).replace(".", "_").replace("-", "_");
     }
 
     public String getName() {
