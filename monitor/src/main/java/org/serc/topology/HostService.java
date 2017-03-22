@@ -22,6 +22,7 @@ public class HostService {
         if (hosts != null) {
             for (HostDTO hostDTO : hosts) {
                 hostDTO.setUpdated(cur);
+                hostDTO.setSensorName(sensorId);
             }
         }
         sensorHosts.put(sensorId, hosts);

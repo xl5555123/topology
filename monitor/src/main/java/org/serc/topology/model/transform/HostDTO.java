@@ -15,6 +15,15 @@ public class HostDTO {
     private List<ServiceDTO> services;
     private String mac;
     private String name;
+    private String sensorName;
+
+    public String getSensorName() {
+        return sensorName;
+    }
+
+    public void setSensorName(String sensorName) {
+        this.sensorName = sensorName;
+    }
 
     public Date getUpdated() {
         return updated;
