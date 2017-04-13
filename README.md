@@ -1,3 +1,9 @@
+# 系统需求
+## 监视器
+如果编译加打包部署需要安装jdk,maven和docker
+只是部署镜像只需docker
+## 传感器
+需要jdk,maven加nmap
 # 部署方法
 ## 监视器
 监视器组件在monitor文件夹中
